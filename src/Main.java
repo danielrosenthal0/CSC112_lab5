@@ -56,9 +56,22 @@ public class Main {
         //returns final result
         return result;
     }
+    //task 2 - queue
+    //requirement 2
+    public static void Stutter(Queue<Integer> q ) {
+        int size = q.size();
+        //loop goes thru queue, removes the front and adds two to the back
+        //basically a circle, after reaching end of loop everything has been duplicated
+        for(int i = 0; i < size; i++) {
+            int j = q.remove();
+            q.add(j);
+            q.add(j);
+        }
+        System.out.println(q);
+    }
 
     public static void main(String [] args){
-
+        //task 1 - stack
         //requirement 1 - reading expressions file
         FileInputStream fis = null;
         //try and catch for file not found, initializes fis
@@ -79,5 +92,14 @@ public class Main {
 
         }
         reader.close();
+
+        //making queue for task 2
+        Queue<Integer> q = new LinkedList<Integer>();
+        q.add(3);
+        q.add(9);
+        q.add(55);
+        q.add(10);
+        q.add(434523543);
+        Stutter(q);
     }
 }
