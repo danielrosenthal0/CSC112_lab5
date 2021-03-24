@@ -7,22 +7,58 @@ import java.util.*;
 public class Main {
     public static int evaluatePostfix(String expr) {
         int result = 0;
-        Stack<Integer> expressions = new Stack<Integer>();
-        for (int i = 0; i < expr.length(); i++) {
+        int num = 0;
+        int num2 = 0;
+        Stack<Integer> operands = new Stack<Integer>();
+        while (expr.length() > 0) {
            String c;
-           c = expr.substring(0,expr.indexOf(" "));
-           System.out.println(Integer.parseInt(c));
+
+           if (expr.contains(" ")) {
+               c = expr.substring(0, expr.indexOf(" "));
+           }
+           else {
+               c = expr;
+               expr = "";
+           }
+            //System.out.println(c);
+            if (c.equals("+")) {
+                int operand1 = operands.pop();
+                int operand2 = operands.pop();
+                //System.out.println("test");
+                result = operand1 + operand2;
+                //System.out.println(result);
+                operands.push(result);
+                expr = expr.substring(expr.indexOf(" ") + 1);
+            } else if (c.equals( "*")) {
+                for(int n: operands){
+                    //System.out.println("list " + n);
+                }
+                int operand1 = operands.pop();
+                int operand2 = operands.pop();
+                result = operand1 * operand2;
+                operands.push(result);
+                expr = expr.substring(expr.indexOf(" ") + 1);
+            }
+            else{
+               num = Integer.parseInt(c);
+               operands.push(num);
+            //System.out.println(num);
+               expr = expr.substring(expr.indexOf(" ") + 1);
+                //System.out.println(expr);
+                }
+//               num2 = Integer.parseInt(c);
+//            System.out.println(num2);
+//               operands.push(num2);
+//            System.out.println("test1");
 
 
-//           if (Character.isDigit(c)) {
-//
-//           }
-           //c = expr.indexOf(" ");
-//            System.out.println(expr.indexOf(" "));
-//            if (Character.isDigit(c)) {
-//                Integer.parseInt(c);
-//                expressions.push(c);
-//            }
+
+
+
+
+            //System.out.println(num);
+
+
         }
 
         return result;
@@ -45,7 +81,7 @@ public class Main {
             //test
             System.out.println(lines);
             //send to evaluate
-            evaluatePostfix(lines);
+            System.out.println("result " + evaluatePostfix(lines)) ;
 
         }
         reader.close();
